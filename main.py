@@ -3,31 +3,35 @@ import logging
 import sys
 from os import getenv
 
+import wikipedia
 from aiogram import Bot, Dispatcher, Router, types
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
-TOKEN = getenv("BOT_TOKEN")
+TOKEN = getenv("TOKEN")
 
 dp = Dispatcher()
 
-
+wikipedia.set_lang('uz')
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:
-    await message.answer(f"Hello, {message.from_user.full_name}!")
+    await message.answer(f"Salom, Wikipedia Botiga xush kelibsiz! \n"
+                         f"Botdan foydalanish uchun qidirmoqchi bo'lgan jumlanigzni kiriting! \n"
+                         f"Masalan: 'O\'zbekiston'")
 
 
 @dp.message()
 async def wikipedia_handler(message: types.Message) -> None:
     try:
-        await message.send_copy(chat_id=message.chat.id)
+        response = wikipedia.summary(message.text)
+        await message.answer(response)
     except TypeError:
-        await message.answer("Nice try!")
+        await message.answer("Bunday maqola mavjud emas!")
 
 
 async def main() -> None:
-    bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
+    bot = Bot("TOKEN", parse_mode=ParseMode.HTML)
     await dp.start_polling(bot)
 
 
