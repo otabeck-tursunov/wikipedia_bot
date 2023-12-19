@@ -9,7 +9,7 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
-TOKEN = getenv("TOKEN")
+TOKEN = getenv("6967414595:AAHaVXIEMl6ngSsAohhpVYIXTq1uhPKswkE")
 
 dp = Dispatcher()
 
@@ -31,7 +31,7 @@ async def wikipedia_handler(message: types.Message) -> None:
 
 
 async def main() -> None:
-    bot = Bot("TOKEN", parse_mode=ParseMode.HTML)
+    bot = Bot("6967414595:AAHaVXIEMl6ngSsAohhpVYIXTq1uhPKswkE", parse_mode=ParseMode.HTML)
     await dp.start_polling(bot)
 
 
