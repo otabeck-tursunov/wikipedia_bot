@@ -26,7 +26,7 @@ async def wikipedia_handler(message: types.Message) -> None:
     try:
         response = wikipedia.summary(message.text)
         await message.answer(response)
-    except TypeError:
+    except:
         await message.answer("Bunday maqola mavjud emas!")
 
 
